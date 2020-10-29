@@ -1,6 +1,20 @@
 // 入口函数
 $(function() {
     getUserInfo()
+
+    // 退出登录
+    var layer = layui.layer
+    $('#btnLogOut').on('click', function() {
+        layer.confirm('确定退出登录?', { icon: 3, title: '提示' }, function(index) {
+            //do something
+            console.log(123);
+            // 点击确认退出,清空本地存储token,跳转到登录页面
+            localStorage.removeItem('token')
+            location.href = '/login.html'
+
+            layer.close(index);
+        });
+    })
 })
 
 // 封装一个全局的获取登录用户信息的函数
@@ -10,11 +24,11 @@ function getUserInfo() {
     $.ajax({
         type: "get",
         url: '/my/userinfo',
-        headers: {
-            Authorization: localStorage.getItem('token') || ''
-        },
+        // headers: {
+        //     Authorization: localStorage.getItem('token') || ''
+        // },
         success: function(res) {
-            console.log(res);
+            // console.log(res);
             if (res.status !== 0) {
                 return layui.layer.msg(res.message)
             }
