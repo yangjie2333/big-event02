@@ -124,7 +124,7 @@ $(function() {
     function pubArticle(fd) {
         $.ajax({
             type: 'post',
-            url: '/my/article/add',
+            url: '/my/article/edit',
             data: fd,
             processData: false,
             contentType: false,
