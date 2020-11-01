@@ -9,6 +9,20 @@ $(function() {
         cate_id: '', // 文章分类的 Id
         state: '', // 文章的状态， 可选值有： 已发布、 草稿   
     }
+    template.defaults.imports.dataFormat = function(date) {
+        var date = new Date(date)
+        var y = date.getFullYear()
+        var m = padZero(date.getMonth() + 1)
+        var d = padZero(date.getDate())
+        var h = padZero(date.getHours())
+        var mm = padZero(date.getMinutes())
+        var ss = padZero(date.getSeconds())
+        return y + '-' + m + '-' + d + ' ' + h + ':' + mm + ':' + ss
+    }
+
+    function padZero(n) {
+        return n < 10 ? '0' + n : n
+    }
 
     // 渲染分类
     function renderCate() {
